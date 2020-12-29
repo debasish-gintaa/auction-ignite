@@ -1,0 +1,94 @@
+gintaa:
+  security:
+    definitions:
+      http:
+        - method: GET
+          endPoints:
+
+
+      web:
+        - method: POST
+          endpoints:
+            - "/**/v1/auction/**"
+            - "/**/v1/auction"
+
+
+        - method: PUT
+          endpoints:
+            - "/**/v1/auction/**"
+            - "/**/v1/auction"
+
+        - method: GET
+          endpoints:
+            - "/"
+            - "/error"
+            - "/favicon.ico"
+            - "/**/*.png"
+            - "/**/*.gif"
+            - "/**/*.svg"
+            - "/**/*.jpg"
+            - "/**/*.html"
+            - "/**/*.css"
+            - "/**/*.js"
+            - "/**/v2/api-docs"
+            - "/v2/api-docs"
+            - "/configuration/ui"
+            - "/swagger-resources"
+            - "/swagger-resources/**"
+            - "/configuration/**"
+            - "/configuration/security"
+            - "/swagger-ui.html"
+            - "/webjars/**"
+            - "/**/v1/auction/**"
+            - "/**/v1/auction"
+            - "/h2-console/**"
+
+  remote:
+    services:
+      otp:
+        name: gintaa-otp
+      io:
+        name: gintaa-io
+      user:
+        name: gintaa-user
+      deals:
+        name: gintaa-deals
+      offers:
+        name: gintaa-offers
+      kyc:
+        name: gintaa-kyc
+  #        url: "localhost:8076"
+
+  cache:
+    provider: redis
+    redis:
+      connection:
+        use-pool: true
+        lettuce:
+          pool:
+            max-idle: 8
+            min-idle: 0
+            max-active: 7
+            max-wait: -1
+            shutdown-timeout: 200
+      server:
+        password: ${CACHE_PASSWORD}
+        standalone:
+          host: ${CACHE_HOST:34.94.154.228}
+          port: ${CACHE_PORT:6379}
+
+spring:
+  autoconfigure:
+    exclude:
+      - org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration
+      - org.springframework.boot.autoconfigure.data.redis.RedisRepositoriesAutoConfiguration
+
+  datasource:
+    username: postgres
+    password: developer
+    url: jdbc:postgresql://localhost:5432/auction
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+  liquibase:
+    enabled: false
