@@ -29,7 +29,7 @@ public class AuctionSummaryStore extends CacheStoreAdapter<String, AuctionSummar
 
     public AuctionSummary load(String s) throws CacheLoaderException {
         log.info(">>>>> storing AuctionSummary of id {} into cache", s);
-        return auctionSummaryRepository.findById(s).orElseThrow(() -> new AuctionSummaryNotFound("XXX No AuctionSummary of id: " + s));
+        return auctionSummaryRepository.findByOfferId(s).orElseThrow(() -> new AuctionSummaryNotFound("XXX No AuctionSummary of id: " + s));
     }
 
     @Override

@@ -8,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.ignite.Ignite;
 import org.apache.ignite.IgniteCache;
 import org.apache.ignite.cache.CacheMode;
+import org.apache.ignite.cluster.ClusterState;
 import org.apache.ignite.configuration.CacheConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -21,7 +22,7 @@ public class IgniteCacheConfiguration {
     private final Ignite ignite;
 
     public IgniteCacheConfiguration(Ignite ignite) {
-        ignite.active(true);
+        ignite.cluster().state(ClusterState.ACTIVE);
         this.ignite = ignite;
     }
 

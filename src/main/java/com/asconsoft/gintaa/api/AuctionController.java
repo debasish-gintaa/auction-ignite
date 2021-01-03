@@ -66,7 +66,7 @@ public class AuctionController {
         log.info("Request to get auction by filter");
         ApiResponse response = ApiResponse.ofSuccess(
                 auctionService.getAuctionSummary(auctionQueryPayload, offset, limit),
-                "Auction save successfully"
+                "Auction summary"
         );
         return new ResponseEntity<>(response, HttpStatus.valueOf(response.getCode()));
     }

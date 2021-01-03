@@ -12,12 +12,14 @@ import java.time.LocalDateTime;
 public class AuctionResponse {
 
     private String auctionId;
+    private boolean isActive;
     private String offerId;
     private String offerName;
     private String offerDescription;
     private double buyoutPrice;
-    private LocalDateTime endDate;
-    private LocalDateTime startDate;
+    private double basePrice;
+    private long endDate;
+    private long startDate;
     private String country;
     private String state;
     private String lat;

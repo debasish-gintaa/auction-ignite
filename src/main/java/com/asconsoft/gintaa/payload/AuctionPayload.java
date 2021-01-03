@@ -23,6 +23,8 @@ public class AuctionPayload {
     private String offerDescription;
     @NotNull(message = "buyout price is required")
     private double buyoutPrice;
+    @NotNull(message = "base_price price is required")
+    private double basePrice;
     @FutureOrPresent(message = "Estd date must be less than today")
     private LocalDateTime endDate;
     @Future(message = "start date is required")

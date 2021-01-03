@@ -89,6 +89,8 @@ spring:
     url: jdbc:postgresql://localhost:5432/auction
   jpa:
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: update
   liquibase:
     enabled: false
+server:
+  port: 8088

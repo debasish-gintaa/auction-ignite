@@ -5,6 +5,7 @@ import com.google.common.base.Objects;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 
 @Getter
 @Setter
@@ -12,15 +13,13 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 public class AuctionQueryPayload {
-    private long bidCount;
     private String state;
-    private LocalDateTime startTime;
-    private LocalDateTime endTime;
+    private long startDays;
+    private long endDays;
 
     public boolean applyFilter(AuctionSummary auctionSummary) {
-        return (bidCount != 0 && auctionSummary.getBidCount() == bidCount) ||
-                Objects.equal(state, auctionSummary.getState()) ||
-                (startTime != null && startTime.isEqual(auctionSummary.getStartDate())) ||
-                (endTime != null && endTime.isEqual(auctionSummary.getEndDate()));
+        return  (state == null || Objects.equal(state, auctionSummary.getState())) &&
+                (startDays == 0 || auctionSummary.getStartDate().isAfter(LocalDateTime.now().minus(startDays, ChronoUnit.DAYS))) &&
+                (endDays == 0 || auctionSummary.getEndDate().isAfter(LocalDateTime.now().minus(endDays, ChronoUnit.DAYS)));
     }
 }

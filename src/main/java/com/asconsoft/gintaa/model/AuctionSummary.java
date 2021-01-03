@@ -22,9 +22,14 @@ public class AuctionSummary extends BaseEntity {
     private String offerName;
     @Column(name = "offer_description")
     private String offerDescription;
+    @Column(name = "base_price")
+    private double basePrice;
     @Column(name = "buyout_price")
     private double buyoutPrice;
+    @Column(name = "is_active")
+    private boolean isActive;
     @Column(name = "bid_count")
+    @QuerySqlField(index = true)
     private long bidCount;
     @Column(name = "current_bid_price")
     private double currentBidPrice;
